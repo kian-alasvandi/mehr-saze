@@ -1,5 +1,13 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { DoorOpen, Wrench, ShieldCheck, Zap, CheckCircle } from 'lucide-react';
+import {
+  DoorOpen,
+  Wrench,
+  ShieldCheck,
+  Zap,
+  CheckCircle,
+  Headphones,
+  PhoneCall,
+} from 'lucide-react';
 
 const AutoDoorPage = () => {
   const features = [
@@ -24,6 +32,7 @@ const AutoDoorPage = () => {
       description: 'مناسب برای فضاهای پرتردد.',
     },
   ];
+  const phones = ['09358867004', '09927435734', '09392744066', '09306270039'];
   const steps = [
     {
       title: 'انتخاب محصول مناسب',
@@ -137,11 +146,17 @@ const AutoDoorPage = () => {
             {features.map((item, index) => (
               <div
                 key={index}
-                className='rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl'
+                className='group rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-md transition duration-300 hover:-translate-y-2 hover:border-blue-500 hover:bg-blue-50/70 hover:shadow-xl'
               >
-                <div className='mb-4 flex justify-center'>{item.icon}</div>
-                <h3 className='mb-2 text-lg font-bold text-blue-700'>{item.title}</h3>
-                <p className='text-sm text-gray-600'>{item.description}</p>
+                <div className='mb-4 flex justify-center text-blue-600 transition duration-300 group-hover:scale-110'>
+                  {item.icon}
+                </div>
+                <h3 className='mb-2 text-lg font-bold text-blue-800 group-hover:text-blue-900'>
+                  {item.title}
+                </h3>
+                <p className='text-sm text-gray-600 group-hover:text-gray-800'>
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
@@ -203,21 +218,68 @@ const AutoDoorPage = () => {
           </div>
         </section>
         );
+        <section dir='rtl' className='bg-white py-16'>
+          <div className='mx-auto max-w-6xl px-4'>
+            <div className='flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-sky-100 via-blue-200 to-sky-100 shadow-xl md:flex-row'>
+              {/* متن و شماره تماس */}
+              <div className='space-y-5 p-8 text-center md:w-1/2 md:text-right'>
+                <h3 className='flex items-center justify-center gap-2 text-2xl font-bold text-gray-800 md:justify-end'>
+                  <PhoneCall size={26} className='text-blue-600' />
+                  نیاز به مشاوره رایگان دارید؟
+                </h3>
+                <p className='text-gray-600'>
+                  برای دریافت راهنمایی، با کارشناسان ما تماس بگیرید یا فرم درخواست تماس را ارسال
+                  کنید.
+                </p>
+
+                <div className='flex flex-wrap justify-center gap-3 md:justify-end'>
+                  {phones.map((phone, index) => (
+                    <div
+                      key={index}
+                      className='flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow transition-all hover:bg-blue-100'
+                    >
+                      <Headphones size={18} className='text-blue-600' />
+                      <span>{phone}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* دکمه CTA */}
+                <button className='mt-4 rounded-full bg-blue-600 px-6 py-2 text-white transition-all hover:bg-blue-700'>
+                  درخواست تماس با مشاور
+                </button>
+              </div>
+
+              {/* تصویر مشاوره */}
+              <div className='md:w-1/2'>
+                <img
+                  src='/images/consult-door.webp'
+                  alt='مشاوره مهرسازه'
+                  className='h-full w-full object-cover'
+                />
+              </div>
+            </div>
+          </div>
+        </section>
         {/* گالری نصب‌ها */}
         <section className='font-iransans bg-white px-4 py-16' dir='rtl'>
           <div className='mx-auto max-w-6xl'>
             <h2 className='mb-8 text-center text-2xl font-extrabold text-blue-700'>
               نمونه نصب درب اتوماتیک
             </h2>
+
             <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <img
-                  key={i}
-                  src={`/images/auto-door-${i}.webp`}
-                  alt={`نمونه ${i}`}
-                  className='rounded-xl shadow transition hover:scale-105'
-                />
-              ))}
+              {Array.from({ length: 6 }, (_, i) => {
+                const imgIndex = i + 1;
+                return (
+                  <img
+                    key={imgIndex}
+                    src={`/images/d-gallery/auto-door-${imgIndex}.webp`}
+                    alt={`نمونه نصب درب اتوماتیک ${imgIndex}`}
+                    className='rounded-xl shadow transition-transform duration-300 hover:scale-105'
+                  />
+                );
+              })}
             </div>
           </div>
         </section>

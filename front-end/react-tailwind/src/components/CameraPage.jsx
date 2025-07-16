@@ -90,6 +90,26 @@ const CameraPage = () => {
             content='فروش دوربین مداربسته، نصب حرفه‌ای در محل، انواع دوربین دید در شب، بی‌سیم و تحت شبکه. قیمت مناسب و مشاوره رایگان در مهرسازه.'
           />
           <link rel='canonical' href='https://mehr-saze.ir/دوربین-مداربسته' />
+
+          {/* سئو شبکه‌های اجتماعی */}
+          <meta property='og:title' content='فروش دوربین مداربسته | نصب حرفه‌ای در محل' />
+          <meta
+            property='og:description'
+            content='دوربین دید در شب، بی‌سیم، ضدآب | مشاوره رایگان در مهرسازه'
+          />
+          <meta property='og:image' content='https://mehr-saze.ir/images/camera-bg.webp' />
+          <meta property='og:url' content='https://mehr-saze.ir/دوربین-مداربسته' />
+          <meta property='og:type' content='product' />
+
+          <meta name='twitter:card' content='summary_large_image' />
+          <meta name='twitter:title' content='دوربین مداربسته | مهرسازه' />
+          <meta
+            name='twitter:description'
+            content='خرید دوربین مناسب با نصب فوری و مشاوره رایگان'
+          />
+          <meta name='twitter:image' content='https://mehr-saze.ir/images/camera-bg.webp' />
+
+          {/* اسکیما سوالات متداول */}
           <script type='application/ld+json'>{JSON.stringify(faqSchema)}</script>
         </Helmet>
         {/* ✅ هدر با بک‌گراند تصویری */}
