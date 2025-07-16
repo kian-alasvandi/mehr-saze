@@ -273,10 +273,9 @@ const AutoDoorPage = () => {
                 const imgIndex = i + 1;
                 return (
                   <img
-                    key={imgIndex}
                     src={`/images/d-gallery/auto-door-${imgIndex}.webp`}
                     alt={`نمونه نصب درب اتوماتیک ${imgIndex}`}
-                    className='rounded-xl shadow transition-transform duration-300 hover:scale-105'
+                    className='aspect-[4/3] w-full rounded-xl object-cover shadow transition-transform duration-300 hover:scale-105'
                   />
                 );
               })}
@@ -328,21 +327,44 @@ const AutoDoorPage = () => {
         {/* مقاله و آموزش */}
         <section className='font-iransans bg-white px-4 py-16' dir='rtl'>
           <div className='mx-auto max-w-6xl'>
-            <h2 className='mb-8 text-center text-2xl font-extrabold text-blue-700'>
-              مقالات و آموزش‌های مرتبط
+            <h2 className='mb-12 text-center text-3xl font-extrabold text-blue-700'>
+              مقالات و آموزش‌های مرتبط با درب اتوماتیک
             </h2>
-            <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
-              {[1, 2, 3].map((i) => (
-                <div key={i} className='rounded-xl border p-4 shadow transition hover:shadow-md'>
+            <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
+              {[
+                {
+                  id: 1,
+                  title: 'کدام نوع درب اتوماتیک برای مغازه من مناسب است؟',
+                  image: '/images/d-gallery/auto-blog-1.webp',
+                  desc: 'در این مقاله به بررسی درب‌های کشویی، تلسکوپی و شیشه‌ای برای فضاهای تجاری می‌پردازیم.',
+                },
+                {
+                  id: 2,
+                  title: 'نکات مهم قبل از خرید درب اتوماتیک',
+                  image: '/images/d-gallery/auto-blog-2.webp',
+                  desc: 'آیا وزن درب اهمیت دارد؟ برق اضطراری چطور؟ این مقاله به پرسش‌های مشتریان پاسخ می‌دهد.',
+                },
+                {
+                  id: 3,
+                  title: 'تفاوت درب‌های تلسکوپی با کشویی چیست؟',
+                  image: '/images/d-gallery/auto-blog-3.webp',
+                  desc: 'تفاوت عملکرد، فضای موردنیاز نصب، قیمت و کاربرد هر مدل را در این مطلب بررسی کرده‌ایم.',
+                },
+              ].map(({ id, title, image, desc }) => (
+                <div
+                  key={id}
+                  className='rounded-xl border border-gray-100 bg-gray-50 p-4 shadow-sm transition duration-200 hover:shadow-md'
+                >
                   <img
-                    src={`/images/auto-blog-${i}.webp`}
-                    alt={`مقاله ${i}`}
-                    className='mb-3 rounded-lg'
+                    src={image}
+                    alt={title}
+                    className='mb-4 h-48 w-full rounded-lg object-cover'
                   />
-                  <h3 className='text-lg font-bold text-blue-800'>آشنایی با درب‌های اتوماتیک</h3>
-                  <p className='mt-2 text-sm text-gray-600'>
-                    مزایا، تفاوت انواع، و نکات نصب درب‌های هوشمند اتوماتیک.
-                  </p>
+                  <h3 className='mb-2 text-lg font-semibold text-blue-800'>{title}</h3>
+                  <p className='mb-4 line-clamp-3 text-sm text-gray-600'>{desc}</p>
+                  <button className='text-sm font-bold text-blue-600 hover:underline'>
+                    مطالعه مقاله →
+                  </button>
                 </div>
               ))}
             </div>

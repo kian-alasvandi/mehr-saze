@@ -1,5 +1,13 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Sun, Umbrella, Wrench, ShieldCheck } from 'lucide-react';
+import {
+  Sun,
+  Umbrella,
+  Wrench,
+  ShieldCheck,
+  CheckCircle,
+  PhoneCall,
+  Headphones,
+} from 'lucide-react';
 
 const CanopyPage = () => {
   const features = [
@@ -24,7 +32,29 @@ const CanopyPage = () => {
       description: 'نصب سریع توسط تیم حرفه‌ای با گارانتی و خدمات پس از فروش.',
     },
   ];
-
+  const steps = [
+    {
+      title: 'انتخاب محصول مناسب',
+      description:
+        'ابتدا از میان محصولات متنوع مهرسازه شامل کرکره برقی، سایبان، درب اتوماتیک، دوربین و جک پارکینگی انتخاب خود را انجام دهید.',
+    },
+    {
+      title: 'تماس و دریافت مشاوره',
+      description:
+        'از طریق شماره تماس یا فرم مشاوره، با ما ارتباط بگیرید تا نیاز شما بررسی و بهترین پیشنهاد ارائه شود.',
+    },
+    {
+      title: 'برآورد قیمت و زمان اجرا',
+      description:
+        'پس از بررسی محل و نیاز، هزینه نهایی و زمان اجرا به شما اعلام می‌شود. شفاف، دقیق و بدون هزینه پنهان.',
+    },
+    {
+      title: 'اجرای نصب و خدمات',
+      description:
+        'تیم متخصص ما پروژه را در محل شما اجرا کرده و تمام خدمات با گارانتی و تجهیزات حرفه‌ای ارائه می‌گردد.',
+    },
+  ];
+  const phones = ['09358867004', '09927435734', '09392744066', '09306270039'];
   const faq = [
     {
       question: 'سایبان برقی برای چه مکان‌هایی مناسب است؟',
@@ -160,6 +190,33 @@ const CanopyPage = () => {
             </div>
           </div>
         </section>
+        {/* بخش مراحل خرید*/}
+        <section className='bg-white px-4 py-20' dir='rtl'>
+          <div className='mx-auto max-w-6xl'>
+            <h2 className='mb-14 text-center text-2xl font-extrabold text-blue-700'>
+              مراحل خرید و دریافت خدمات از مهرسازه
+            </h2>
+
+            <div className='relative flex flex-col gap-10 border-r-4 border-blue-100 md:grid md:grid-cols-4 md:border-t-4 md:border-r-0'>
+              {steps.map((step, index) => (
+                <div key={index} className='relative pl-6 md:pt-6 md:pl-0'>
+                  {/* نقطه و آیکون */}
+                  <div className='absolute top-1 right-[-10px] md:top-[-12px] md:right-auto md:left-1/2 md:-translate-x-1/2'>
+                    <div className='flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white shadow-md'>
+                      <CheckCircle size={20} />
+                    </div>
+                  </div>
+
+                  {/* باکس محتوا */}
+                  <div className='rounded-xl border border-gray-100 bg-gray-50 p-5 shadow transition hover:border-blue-500 hover:bg-blue-50'>
+                    <h3 className='mb-2 text-lg font-bold text-blue-800'>{step.title}</h3>
+                    <p className='text-sm leading-6 text-gray-700'>{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* گالری نصب */}
         <section className='font-iransans bg-white px-4 py-16' dir='rtl'>
@@ -184,6 +241,49 @@ const CanopyPage = () => {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+        <section dir='rtl' className='bg-white py-16'>
+          <div className='mx-auto max-w-6xl px-4'>
+            <div className='flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-sky-100 via-blue-200 to-sky-100 shadow-xl md:flex-row'>
+              {/* متن و شماره تماس */}
+              <div className='space-y-5 p-8 text-center md:w-1/2 md:text-right'>
+                <h3 className='flex items-center justify-center gap-2 text-2xl font-bold text-gray-800 md:justify-end'>
+                  <PhoneCall size={26} className='text-blue-600' />
+                  نیاز به مشاوره رایگان دارید؟
+                </h3>
+                <p className='text-gray-600'>
+                  برای دریافت راهنمایی، با کارشناسان ما تماس بگیرید یا فرم درخواست تماس را ارسال
+                  کنید.
+                </p>
+
+                <div className='flex flex-wrap justify-center gap-3 md:justify-end'>
+                  {phones.map((phone, index) => (
+                    <div
+                      key={index}
+                      className='flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow transition-all hover:bg-blue-100'
+                    >
+                      <Headphones size={18} className='text-blue-600' />
+                      <span>{phone}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* دکمه CTA */}
+                <button className='mt-4 rounded-full bg-blue-600 px-6 py-2 text-white transition-all hover:bg-blue-700'>
+                  درخواست تماس با مشاور
+                </button>
+              </div>
+
+              {/* تصویر مشاوره */}
+              <div className='md:w-1/2'>
+                <img
+                  src='/images/consult-door.webp'
+                  alt='مشاوره مهرسازه'
+                  className='h-full w-full object-cover'
+                />
+              </div>
             </div>
           </div>
         </section>

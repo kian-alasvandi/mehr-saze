@@ -208,9 +208,8 @@ const CameraPage = () => {
               </div>
             </div>
           </div>
-
-          {/* بخش مراحل خرید*/}
         </section>
+        {/* بخش مراحل خرید*/}
         <section className='bg-white px-4 py-20' dir='rtl'>
           <div className='mx-auto max-w-6xl'>
             <h2 className='mb-14 text-center text-2xl font-extrabold text-blue-700'>
