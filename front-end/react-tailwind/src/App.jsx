@@ -1,7 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
-import './styles/tailwind.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Suspense, lazy, useEffect, useState } from 'react';
 
+import './styles/tailwind.css';
+import Blog1 from './components/blogs/Blog1';
+import Loader from './components/Loader';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ComingSoon from './components/ComingSoon';
@@ -15,7 +17,7 @@ import ContactPage from './components/ContactPage';
 import TimelineSection from './components/TimelineSection';
 import FloatingCallButton from './components/FloatingCallButton';
 import Layout from './components/Layout';
-import PricePage from './components/PricePage'; // ✅ اضافه شد
+import PricePage from './components/PricePage';
 import ShutterServices from './components/shutter/ShutterServices';
 import CameraPage from './components/CameraPage';
 import ScrollToTop from './components/ScrollToTop';
@@ -24,16 +26,31 @@ import CanopyPage from './components/CanopyPage';
 import ParkingJack from './components/ParkingJack';
 import ProductsPage from './components/ProductsPage';
 import ConsultBoxAdvanced from './components/ConsultBoxAdvanced';
-
 import AboutUs from './components/AboutUs';
-// ✅ lazy load
+import BlogListPage from './components/BlogListPage';
+
+// lazy loaded components
 const PortfolioGallery = lazy(() => import('./components/PortfolioGallery'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const BlogSection = lazy(() => import('./components/BlogSection'));
 
-const App = () => {
+const AppContent = () => {
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      const timer = setTimeout(() => setLoading(false), 3000);
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
+  }, [location.pathname]);
+
+  if (loading) return <Loader />;
+
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <Routes>
         {/* صفحه اصلی */}
@@ -49,7 +66,6 @@ const App = () => {
                   fetchPriority='high'
                 />
                 <div className='absolute inset-0 bg-black/30'></div>
-
                 <div className='relative z-10'>
                   <Header />
                   <Hero />
@@ -72,6 +88,7 @@ const App = () => {
               </Suspense>
 
               <div className='relative h-20 w-full bg-gradient-to-b from-white to-gray-100' />
+
               <Suspense fallback={null}>
                 <BlogSection />
               </Suspense>
@@ -80,12 +97,29 @@ const App = () => {
             </>
           }
         />
-        {/* ✅ صفحه سئو شده قیمت کرکره برقی */}
+
+        {/* سایر صفحات */}
         <Route
           path='/قیمت-کرکره-برقی'
           element={
             <Layout>
               <PricePage />
+            </Layout>
+          }
+        />
+        <Route
+          path='/بلاگ/blog-1'
+          element={
+            <Layout>
+              <Blog1 />
+            </Layout>
+          }
+        />
+        <Route
+          path='/بلاگ'
+          element={
+            <Layout>
+              <BlogListPage />
             </Layout>
           }
         />
@@ -105,8 +139,6 @@ const App = () => {
             </Layout>
           }
         />
-
-        {/* مسیر داینامیک محصولات */}
         <Route
           path=':id'
           element={
@@ -115,7 +147,6 @@ const App = () => {
             </Layout>
           }
         />
-        {/* سایر مسیرها */}
         <Route
           path='/نمونه-کارها'
           element={
@@ -148,7 +179,6 @@ const App = () => {
             </Layout>
           }
         />
-
         <Route
           path='سایبان-برقی'
           element={
@@ -157,7 +187,6 @@ const App = () => {
             </Layout>
           }
         />
-
         <Route
           path='جک-پارکینگی'
           element={
@@ -185,6 +214,14 @@ const App = () => {
       </Routes>
 
       <FloatingCallButton />
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };
