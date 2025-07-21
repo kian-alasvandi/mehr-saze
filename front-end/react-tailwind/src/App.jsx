@@ -3,6 +3,9 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 
 import './styles/tailwind.css';
 import Blog1 from './components/blogs/Blog1';
+import Blog2 from './components/blogs/Blog2';
+import Blog3 from './components/blogs/Blog3';
+import Blog4 from './components/blogs/Blog4';
 import Loader from './components/Loader';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -108,10 +111,34 @@ const AppContent = () => {
           }
         />
         <Route
-          path='/بلاگ/blog-1'
+          path='/بلاگ/هوشمند-سازی-خانه'
           element={
             <Layout>
               <Blog1 />
+            </Layout>
+          }
+        />
+        <Route
+          path='/بلاگ/درب-اتوماتیک'
+          element={
+            <Layout>
+              <Blog2 />
+            </Layout>
+          }
+        />
+        <Route
+          path='/بلاگ/جک-پارکینگی'
+          element={
+            <Layout>
+              <Blog3 />
+            </Layout>
+          }
+        />
+        <Route
+          path='بلاگ/تفاوت-کرکره-برقی'
+          element={
+            <Layout>
+              <Blog4 />
             </Layout>
           }
         />
