@@ -164,6 +164,9 @@ const Navbar = () => {
       <a href='/تماس-با-ما' className='transition hover:text-blue-600'>
         تماس با ما
       </a>
+      <Link to='/بلاگ' className='transition hover:text-blue-600'>
+        بلاگ ها
+      </Link>
     </nav>
   );
 
@@ -409,6 +412,26 @@ const Navbar = () => {
           </svg>
           تماس با ما
         </a>
+        <Link
+          to='/بلاگ'
+          onClick={() => setIsMenuOpen(false)}
+          className='flex items-center gap-3 transition hover:text-blue-600'
+        >
+          <svg
+            className='h-5 w-5 text-blue-500'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M4 6h16M4 12h16M4 18h16'
+            />
+          </svg>
+          بلاگ
+        </Link>
       </nav>
     </div>
   );

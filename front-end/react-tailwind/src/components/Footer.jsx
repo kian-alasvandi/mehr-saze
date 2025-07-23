@@ -43,18 +43,23 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href='/products' className='transition hover:text-white'>
+                <a href='/محصولات' className='transition hover:text-white'>
                   محصولات
                 </a>
               </li>
               <li>
-                <a href='/portfolio' className='transition hover:text-white'>
+                <a href='/نمونه-کارها' className='transition hover:text-white'>
                   نمونه‌کارها
                 </a>
               </li>
               <li>
-                <a href='/contact' className='transition hover:text-white'>
+                <a href='/تماس-با-ما' className='transition hover:text-white'>
                   تماس با ما
+                </a>
+              </li>
+              <li>
+                <a href='/بلاگ' className='transition hover:text-white'>
+                  بلاگ
                 </a>
               </li>
             </ul>
@@ -74,7 +79,7 @@ const Footer = () => {
               </li>
               <li className='flex items-center gap-2'>
                 <MapPin size={16} />
-                تهران، خیابان آزادی
+                کرج,میدان طالقانی
               </li>
             </ul>
           </div>

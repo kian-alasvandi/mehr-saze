@@ -1,5 +1,18 @@
 import { useState } from 'react';
-import { Menu, X, Instagram, Facebook, PhoneCall, ChevronRight } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Instagram,
+  Facebook,
+  PhoneCall,
+  ChevronRight,
+  Search,
+  Home,
+  Boxes,
+  Image,
+  Info,
+  PhoneIncoming,
+} from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -96,7 +109,7 @@ const SimpleHeader = () => {
         </div>
       </div>
 
-      {/* منوی موبایل با انیمیشن */}
+      {/* منوی موبایل با انیمیشن بهبود یافته */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -110,11 +123,11 @@ const SimpleHeader = () => {
               animate={{ x: 0 }}
               exit={{ x: 300 }}
               transition={{ duration: 0.3 }}
-              className='h-full w-64 rounded-s-xl bg-white p-6 shadow-xl'
+              className='h-full w-72 rounded-s-xl bg-gradient-to-br from-white to-blue-50 p-6 shadow-xl backdrop-blur-xl'
               dir='rtl'
             >
-              <div className='mb-6 flex items-center justify-between'>
-                <span className='text-lg font-bold text-blue-700'>منو</span>
+              <div className='mb-4 flex items-center justify-between'>
+                <span className='text-lg font-bold text-blue-700'>منوی سایت</span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className='text-gray-700 hover:text-red-500'
@@ -123,41 +136,50 @@ const SimpleHeader = () => {
                 </button>
               </div>
 
-              <div className='flex flex-col gap-5 text-[16px] font-bold text-gray-800'>
+              <div className='relative mb-4'>
+                <input
+                  type='text'
+                  placeholder='جستجو...'
+                  className='w-full rounded-full border border-gray-300 px-4 py-2 pr-10 text-sm shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none'
+                />
+                <Search className='absolute top-2.5 right-3 text-gray-500' size={18} />
+              </div>
+
+              <div className='flex flex-col gap-4 text-[16px] font-bold text-gray-800'>
                 <Link
                   to='/'
                   onClick={() => setIsMenuOpen(false)}
                   className='flex items-center gap-2 hover:text-blue-700'
                 >
-                  <ChevronRight size={18} /> خانه
+                  <Home size={18} /> خانه
                 </Link>
                 <Link
                   to='/محصولات'
                   onClick={() => setIsMenuOpen(false)}
                   className='flex items-center gap-2 hover:text-blue-700'
                 >
-                  <ChevronRight size={18} /> محصولات
+                  <Boxes size={18} /> محصولات
                 </Link>
                 <Link
                   to='/نمونه-کارها'
                   onClick={() => setIsMenuOpen(false)}
                   className='flex items-center gap-2 hover:text-blue-700'
                 >
-                  <ChevronRight size={18} /> نمونه‌کارها
+                  <Image size={18} /> نمونه‌کارها
                 </Link>
                 <Link
                   to='/درباره-ما'
                   onClick={() => setIsMenuOpen(false)}
                   className='flex items-center gap-2 hover:text-blue-700'
                 >
-                  <ChevronRight size={18} /> درباره ما
+                  <Info size={18} /> درباره ما
                 </Link>
                 <Link
                   to='/تماس-با-ما'
                   onClick={() => setIsMenuOpen(false)}
                   className='flex items-center gap-2 hover:text-blue-700'
                 >
-                  <ChevronRight size={18} /> تماس با ما
+                  <PhoneIncoming size={18} /> تماس با ما
                 </Link>
                 <Link
                   to='/درخواست-مشاوره'

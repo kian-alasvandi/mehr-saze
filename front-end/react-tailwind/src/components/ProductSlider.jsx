@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ChevronLeft,
-  ChevronRight,
+  ArrowLeftCircle,
+  ArrowRightCircle,
   Camera,
   Blinds,
   DoorOpen,
@@ -70,7 +70,7 @@ const fadeUpVariant = {
     y: 0,
     transition: {
       delay: i * 0.1,
-      duration: 0.6,
+      duration: 0.5,
       ease: 'easeOut',
     },
   }),
@@ -78,6 +78,15 @@ const fadeUpVariant = {
 
 const ProductSlider = () => {
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % products.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
 
   const nextSlide = () => {
     setCurrent((prev) => (prev + 1) % products.length);
@@ -87,10 +96,28 @@ const ProductSlider = () => {
     setCurrent((prev) => (prev - 1 + products.length) % products.length);
   };
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (distance > 50) nextSlide();
+    else if (distance < -50) prevSlide();
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <section className='bg-gradient-to-b from-sky-50 to-blue-100 py-20' dir='rtl'>
       <div className='mx-auto max-w-6xl px-4'>
-        {/* عنوان بخش */}
         <motion.div
           className='relative mb-10 flex items-center justify-center'
           initial='hidden'
@@ -105,19 +132,24 @@ const ProductSlider = () => {
           </span>
         </motion.div>
 
-        {/* موبایل: اسلایدر تکی */}
         <motion.div
-          className='relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 sm:hidden'
-          initial='hidden'
-          whileInView='visible'
-          variants={fadeUpVariant}
-          viewport={{ once: true }}
+          className='relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 sm:hidden'
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <img
+          <motion.img
+            key={products[current].image}
             src={products[current].image}
             alt={products[current].title}
             className='h-100 w-full rounded-t-3xl object-cover sm:h-52'
             loading='lazy'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
           />
           <div className='flex flex-col justify-between p-5'>
             <div>
@@ -137,22 +169,20 @@ const ProductSlider = () => {
             </Link>
           </div>
 
-          {/* دکمه‌های موبایل */}
           <button
             onClick={prevSlide}
-            className='absolute top-1/2 right-3 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white shadow-md hover:bg-black/50'
+            className='absolute top-1/2 right-3 -translate-y-1/2 rounded-full bg-white/80 p-1 text-blue-800 shadow-lg transition hover:bg-white'
           >
-            <ChevronRight size={20} />
+            <ArrowRightCircle size={28} strokeWidth={2.2} />
           </button>
           <button
             onClick={nextSlide}
-            className='absolute top-1/2 left-3 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white shadow-md hover:bg-black/50'
+            className='absolute top-1/2 left-3 -translate-y-1/2 rounded-full bg-white/80 p-1 text-blue-800 shadow-lg transition hover:bg-white'
           >
-            <ChevronLeft size={20} />
+            <ArrowLeftCircle size={28} strokeWidth={2.2} />
           </button>
         </motion.div>
 
-        {/* نقاط پایین موبایل */}
         <div className='mt-4 flex justify-center gap-2 sm:hidden'>
           {products.map((_, idx) => (
             <span
@@ -165,7 +195,6 @@ const ProductSlider = () => {
           ))}
         </div>
 
-        {/* دسکتاپ: گرید انیمیشنی */}
         <motion.div
           className='mt-12 hidden grid-cols-1 gap-8 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           initial='hidden'
